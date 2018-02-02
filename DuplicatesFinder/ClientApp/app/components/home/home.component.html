@@ -4,4 +4,9 @@
         <input name="path" type="text" [(ngModel)]="path" class="form-control" />
     </label>
     <button type="submit" class="btn btn-primary">Submit</button>
+    <ul>
+        <li *ngFor="let message of messages">
+            {{ message }}
+        </li>
+    </ul>
 </form>

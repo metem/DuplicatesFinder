@@ -50,7 +50,7 @@ namespace DuplicatesFinder
 
             app.UseSignalR(routes =>
             {
-                routes.MapHub<SignalRActor.DuplicatesFinderHub>("DuplicatesFinderHub");
+                routes.MapHub<DuplicatesFinderHub>("DuplicatesFinderHub");
             });
 
             app.UseStaticFiles();

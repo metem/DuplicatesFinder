@@ -3,13 +3,9 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace DuplicatesFinder.Core
 {
-    public class SignalRActor : ReceiveActor
+    public partial class SignalRActor : ReceiveActor
     {
         private readonly IHubContext<DuplicatesFinderHub> _hub;
-
-        public class DuplicatesFinderHub : Hub
-        {
-        }
 
         public SignalRActor(IHubContext<DuplicatesFinderHub> hubContext)
         {

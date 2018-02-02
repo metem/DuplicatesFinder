@@ -26,16 +26,16 @@ namespace DuplicatesFinder.Core
 
             Receive<ResourcesProviderActor.ResourceFoundMsg>(msg =>
                 _firstStageDuplicateChecker.Tell(
-                    new DuplicatesCheckerActor.CheckIfDuplicateMsg(new FileSizeResource(msg.Resource))));
+                    new DuplicatesCheckerActor.CheckIfDuplicateMsg(msg.JobId, new FileSizeResource(msg.Resource))));
 
             Receive<DuplicateFoundMsg>(msg =>
             {
                 if (msg.Duplicate is FileSizeResource)
                 {
                     _secondStageDuplicateChecker.Tell(
-                        new DuplicatesCheckerActor.CheckIfDuplicateMsg(new FileChecksumResource(msg.Original)));
+                        new DuplicatesCheckerActor.CheckIfDuplicateMsg(msg.JobId, new FileChecksumResource(msg.Original)));
                     _secondStageDuplicateChecker.Tell(
-                        new DuplicatesCheckerActor.CheckIfDuplicateMsg(new FileChecksumResource(msg.Duplicate)));
+                        new DuplicatesCheckerActor.CheckIfDuplicateMsg(msg.JobId, new FileChecksumResource(msg.Duplicate)));
                 }
                 else
                 {

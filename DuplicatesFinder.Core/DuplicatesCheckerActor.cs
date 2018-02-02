@@ -18,18 +18,20 @@ namespace DuplicatesFinder.Core
                 if (_originalResources.Any(resource =>
                     string.Equals(resource.Name, msg.Resource.Name, StringComparison.OrdinalIgnoreCase))) return;
 
-                Sender.Tell(new DuplicateFoundMsg(
+                Sender.Tell(new DuplicateFoundMsg(msg.JobId,
                     _originalResources.First(resource => resource.Equals(msg.Resource)), msg.Resource));
             });
         }
 
         public class CheckIfDuplicateMsg
         {
-            public CheckIfDuplicateMsg(IResource resource)
+            public CheckIfDuplicateMsg(Guid jobId, IResource resource)
             {
+                JobId = jobId;
                 Resource = resource;
             }
 
+            public Guid JobId { get; }
             public IResource Resource { get; }
         }
     }
