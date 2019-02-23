@@ -14,5 +14,9 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
+- task: NodeTool@0 
+  inputs:
+    versionSpec: '8.x'
+
 - script: dotnet build --configuration $(buildConfiguration)
   displayName: 'dotnet build $(buildConfiguration)'
